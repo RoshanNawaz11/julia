@@ -689,6 +689,9 @@ end
     scdm = sincosd(missing)
     @test ismissing(scdm[1])
     @test ismissing(scdm[2])
+    # `sincospi(missing)` returns a pair so destructuring matches `sincos`/`sincosd`
+    @test sincospi(missing) === (missing, missing)
+    @test (s, c = sincospi(missing); s === missing && c === missing)
 end
 
 @testset "behavior at signed zero of monotonic floating-point functions mapping zero to zero" begin
